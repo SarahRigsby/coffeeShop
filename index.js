@@ -76,24 +76,52 @@ window.onload = function(){
 }
 
 function addedToCart(item){
-//   console.log('addToCart', item);
-  cart.push(item);
-  displayCart();
-//   console.log('cart',cart);
-}
+    console.log('before', cart)
+    let itemFound = false;
+    if(cart && cart.length >= 0){
+        if(cart.length === 0){
+            cart.push(item);
+            cart[0].quantity =1;
+        }
+        else{
+            for (let i = 0; i < cart.length; i++){
+                if(cart[i].id === item.id){
+                    itemFound = true;
+                    cart[i].quantity =cart[i].quantity +1;
+                    break;
+                }
+            }
+        if(!itemFound){
+            cart.push(item);
+            cart[cart.length-1].quantity = 1;
+          }
+        }
+        displayCart();
+    }
+    else{
+        alert(`that didn't work`)
+    }
+    console.log('after', cart)
+
+   }
+
 
 function displayCart(){
     let cartElement= document.getElementById('cart');
     cartElement.replaceChildren();
     console.log('cartElement', cartElement);
-    for (let i = 0; i < cart.length; i++) {
+    let total = 0;
+    for(let i = 0; i < cart.length; i++) {
+        let itemTotal = cart[i].price * cart[i].quantity;
+        total += itemTotal;
         console.log('cart at index i', cart[i]);
         const cartItemElement = document.createElement('div');
-        cartItemElement.innerText=cart[i].item;
+        cartItemElement.innerText=`${cart[i].quantity}- ${cart[i].item}- $${itemTotal}`;
         cartElement.appendChild(cartItemElement);
      }  
+     let cartTotalElement= document.getElementById('cartTotal');
+     cartTotalElement.innerText= `Total $${total}`;
 }
-
 
 function changeName(){
     let inputValueElement = document.getElementById('inputName')
