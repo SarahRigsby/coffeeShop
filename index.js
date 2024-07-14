@@ -97,12 +97,12 @@ function addedToCart(item){
           }
         }
         displayCart();
+        toggleClearCartButton();
     }
     else{
         alert(`that didn't work`)
     }
     console.log('after', cart)
-
    }
 
 
@@ -121,6 +121,26 @@ function displayCart(){
      }  
      let cartTotalElement= document.getElementById('cartTotal');
      cartTotalElement.innerText= `Total $${total}`;
+}
+function clearCart(){
+    console.log('clearCart', clearCart);
+    cart = []
+    console.log('cart', cart);
+    displayCart();
+    toggleClearCartButton();
+}
+
+function toggleClearCartButton(){
+    let toggleClearCartButtonElement=document.getElementById('clearCart');
+    let cartTotalElement=document.getElementById('cartTotal');
+    if(cart && cart.length >0){
+      toggleClearCartButtonElement.style.display='inline';
+      cartTotalElement.style.display='block';
+    }
+    else{
+      toggleClearCartButtonElement.style.display='none';
+      cartTotalElement.style.display='none';  
+    }
 }
 
 function changeName(){
