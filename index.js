@@ -12,6 +12,9 @@ const menuItems = [
 ]
 window.onload = function(){
     console.log('cart',cart)
+    // document.getElementById('contactForm').addEventListener('submit', (event) =>submitContactForm(event))
+    let formElement = document.getElementById('contactForm');
+    formElement.addEventListener('submit', (event) =>submitContactForm(event));
     let menuItemElement= document.getElementById('menuItemContainer')
 
     for (let index = 0; index < menuItems.length; index++) {
@@ -150,4 +153,20 @@ function changeName(){
 
     let user = document.getElementById('user')
     user.textContent = 'Hello ' + inputValue
+}
+
+
+// Contact Form Javascript
+
+function submitContactForm(event){
+    event.preventDefault();
+    console.log('I am submitting');
+    const name= document.getElementById('name').value;
+    console.log('name', name)
+    const email= document.getElementById('email').value;
+    console.log('email', email);
+    const message= document.getElementById('message').value;
+    console.log('message', message);
+    alert(`Thank you ${name} for subscribing`);
+    document.getElementById('contactForm').reset();
 }
