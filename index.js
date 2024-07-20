@@ -132,13 +132,16 @@ function clearCart(){
 function toggleClearCartButton(){
     let toggleClearCartButtonElement=document.getElementById('clearCart');
     let cartTotalElement=document.getElementById('cartTotal');
+    let checkOutButtonElement=document.getElementById('checkOut');
     if(cart && cart.length >0){
       toggleClearCartButtonElement.style.display='inline';
       cartTotalElement.style.display='block';
+      checkOutButtonElement.style.display='inline';
     }
     else{
       toggleClearCartButtonElement.style.display='none';
       cartTotalElement.style.display='none';  
+      checkOutButtonElement.style.display='none';
     }
 }
 
@@ -149,4 +152,14 @@ function changeName(){
 
     let user = document.getElementById('user')
     user.textContent = 'Hello ' + inputValue
+}
+
+// adding checkOut function below
+function checkOut(){
+    const cartString = JSON.stringify(cart);
+    console.log('cart', typeof cart);
+    console.log('cartString', typeof cartString);
+    const encodedCart = encodeURIComponent(cartString);
+    console.log('encodedCart', encodedCart);
+    window.location.href = `checkOutPage.html?cart=${encodedCart}`;
 }
